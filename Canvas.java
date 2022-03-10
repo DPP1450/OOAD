@@ -110,11 +110,11 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
         super.paint(g);
         g.setColor(Color.BLACK);
         for (Port[] i : lines) {
-            int x1 = i[0].getX() + i[0].block.getX();
-            int y1 = i[0].getY() + i[0].block.getY();
-            int x2 = i[1].getX() + i[1].block.getX();
-            int y2 = i[1].getY() + i[1].block.getY();
-            g.drawLine(x1 + 5, y1 + 5, x2 + 5, y2 + 5);
+            int x1 = i[0].getX() + i[0].block.getX() + 5;
+            int y1 = i[0].getY() + i[0].block.getY() + 5;
+            int x2 = i[1].getX() + i[1].block.getX() + 5;
+            int y2 = i[1].getY() + i[1].block.getY() + 5;
+            g.drawLine(x1, y1, x2, y2);
         }
     }
 
