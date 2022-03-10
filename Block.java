@@ -94,7 +94,7 @@ public class Block extends JPanel implements MouseListener, MouseMotionListener 
                 || canvas.frame.function == "compositionLine") {
             if (canvas.lineStartPoint != null && canvas.lineEndBlock != null) {
                 Port shortestPort = canvas.lineEndBlock.findShortestPort();
-                canvas.addAssociationLine(canvas.lineStartPoint, shortestPort); // 之後要新增其他種類的line
+                canvas.addLine(canvas.lineStartPoint, shortestPort);
                 canvas.lineStartPoint = null;
             }
         }

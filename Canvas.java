@@ -8,7 +8,9 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
     public Frame frame;
     public Port lineStartPoint;
     public Block lineEndBlock;
-    public ArrayList<Port[]> lines;
+    public ArrayList<Port[]> AssociationLines;
+    public ArrayList<Port[]> generalizationLines;
+    public ArrayList<Port[]> compositionLines;
     public ArrayList<Block> blocks;
     public ArrayList<Composite> composites;
     public ArrayList<Block> selectedBlock;
@@ -28,7 +30,9 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
         this.setBackground(Color.white);
         blocks = new ArrayList<Block>();
         composites = new ArrayList<Composite>();
-        lines = new ArrayList<Port[]>();
+        AssociationLines = new ArrayList<Port[]>();
+        generalizationLines = new ArrayList<Port[]>();
+        compositionLines = new ArrayList<Port[]>();
         selectedComposite = new ArrayList<Composite>();
         selectedBlock = new ArrayList<Block>();
         lineStartPoint = null;
@@ -106,10 +110,24 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
     }
 
     @Override
-    public void paint(Graphics g) {
+    public void paint(Graphics g) { // 要改成不同的線
         super.paint(g);
         g.setColor(Color.BLACK);
-        for (Port[] i : lines) {
+        for (Port[] i : AssociationLines) {
+            int x1 = i[0].getX() + i[0].block.getX() + 5;
+            int y1 = i[0].getY() + i[0].block.getY() + 5;
+            int x2 = i[1].getX() + i[1].block.getX() + 5;
+            int y2 = i[1].getY() + i[1].block.getY() + 5;
+            g.drawLine(x1, y1, x2, y2);
+        }
+        for (Port[] i : generalizationLines) {
+            int x1 = i[0].getX() + i[0].block.getX() + 5;
+            int y1 = i[0].getY() + i[0].block.getY() + 5;
+            int x2 = i[1].getX() + i[1].block.getX() + 5;
+            int y2 = i[1].getY() + i[1].block.getY() + 5;
+            g.drawLine(x1, y1, x2, y2);
+        }
+        for (Port[] i : compositionLines) {
             int x1 = i[0].getX() + i[0].block.getX() + 5;
             int y1 = i[0].getY() + i[0].block.getY() + 5;
             int x2 = i[1].getX() + i[1].block.getX() + 5;
@@ -118,9 +136,14 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
         }
     }
 
-    public void addAssociationLine(Port p1, Port p2) {
+    public void addLine(Port p1, Port p2) {
         Port[] tmp = { p1, p2 };
-        lines.add(tmp);
+        if (frame.function == "associationLine")
+            AssociationLines.add(tmp);
+        else if (frame.function == "generalizationLine")
+            generalizationLines.add(tmp);
+        else
+            compositionLines.add(tmp);
         repaint();
     }
 
