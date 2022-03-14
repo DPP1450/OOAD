@@ -48,7 +48,7 @@ public class Frame extends JFrame {
                     function = "NULL";
                 } else {
                     function = "select";
-                    select.setBackground(Color.RED);
+                    select.setBackground(Color.lightGray);
                     associationLine.setSelected(false);
                     generalizationLine.setSelected(false);
                     compositionLine.setSelected(false);
@@ -69,7 +69,7 @@ public class Frame extends JFrame {
                     function = "NULL";
                     associationLine.setBackground(Color.WHITE);
                 } else {
-                    associationLine.setBackground(Color.RED);
+                    associationLine.setBackground(Color.lightGray);
                     function = "associationLine";
                     select.setSelected(false);
                     generalizationLine.setSelected(false);
@@ -91,7 +91,7 @@ public class Frame extends JFrame {
                     generalizationLine.setBackground(Color.WHITE);
                     function = "NULL";
                 } else {
-                    generalizationLine.setBackground(Color.RED);
+                    generalizationLine.setBackground(Color.lightGray);
                     function = "generalizationLine";
                     associationLine.setSelected(false);
                     select.setSelected(false);
@@ -113,7 +113,7 @@ public class Frame extends JFrame {
                     compositionLine.setBackground(Color.WHITE);
                     function = "NULL";
                 } else {
-                    compositionLine.setBackground(Color.RED);
+                    compositionLine.setBackground(Color.lightGray);
                     function = "compositionLine";
                     associationLine.setSelected(false);
                     generalizationLine.setSelected(false);
@@ -135,7 +135,7 @@ public class Frame extends JFrame {
                     classBtn.setBackground(Color.WHITE);
                     function = "NULL";
                 } else {
-                    classBtn.setBackground(Color.RED);
+                    classBtn.setBackground(Color.lightGray);
                     function = "class";
                     associationLine.setSelected(false);
                     generalizationLine.setSelected(false);
@@ -157,7 +157,7 @@ public class Frame extends JFrame {
                     useCase.setBackground(Color.WHITE);
                     function = "NULL";
                 } else {
-                    useCase.setBackground(Color.RED);
+                    useCase.setBackground(Color.lightGray);
                     function = "useCase";
                     associationLine.setSelected(false);
                     generalizationLine.setSelected(false);
