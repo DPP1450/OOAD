@@ -195,9 +195,8 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
 
     public static void drawAL(double sx, double sy, double ex, double ey,
             Graphics2D g2, String type) {
-
-        double H = 10;
-        double L = 4;
+        double H = 12;
+        double L = 8;
         double awrad = Math.atan(L / H);
         double arraow_len = Math.sqrt(L * L + H * H);
         double[] arrXY_1 = rotateVec(ex - sx, ey - sy, awrad, true, arraow_len);
@@ -210,8 +209,8 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
         int y3 = (int) y_3;
         int x4 = (int) x_4;
         int y4 = (int) y_4;
-        g2.drawLine((int) sx, (int) sy, (int) ex, (int) ey);
         if (type == "AssociationLines") {
+            g2.drawLine((int) sx, (int) sy, (int) ex, (int) ey);
             g2.drawLine((int) ex, (int) ey, (int) x3, (int) y3);
             g2.drawLine((int) ex, (int) ey, (int) x4, (int) y4);
         } else if (type == "generalizationLines") {
@@ -221,6 +220,7 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
             triangle.lineTo(x4, y4);
             triangle.closePath();
             g2.draw(triangle);
+            g2.drawLine((int) sx, (int) sy, (int) (x_3 + (x_4 - x_3) / 2), (int) (y_3 + (y_4 - y_3) / 2));
         }
     }
 
