@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.util.*;
 import java.awt.*;
+import java.awt.geom.*;
 
 public class Canvas extends JLayeredPane implements MouseListener, MouseMotionListener {
 
@@ -112,27 +113,28 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
     @Override
     public void paint(Graphics g) { // 要改成不同的線
         super.paint(g);
-        g.setColor(Color.BLACK);
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setColor(Color.BLACK);
         for (Port[] i : AssociationLines) {
-            int x1 = i[0].getX() + i[0].block.getX() + 5;
-            int y1 = i[0].getY() + i[0].block.getY() + 5;
-            int x2 = i[1].getX() + i[1].block.getX() + 5;
-            int y2 = i[1].getY() + i[1].block.getY() + 5;
-            g.drawLine(x1, y1, x2, y2);
+            double x1 = i[0].getX() + i[0].block.getX() + 5;
+            double y1 = i[0].getY() + i[0].block.getY() + 5;
+            double x2 = i[1].getX() + i[1].block.getX() + 5;
+            double y2 = i[1].getY() + i[1].block.getY() + 5;
+            drawAL(x1, y1, x2, y2, g2, "AssociationLines");
         }
         for (Port[] i : generalizationLines) {
-            int x1 = i[0].getX() + i[0].block.getX() + 5;
-            int y1 = i[0].getY() + i[0].block.getY() + 5;
-            int x2 = i[1].getX() + i[1].block.getX() + 5;
-            int y2 = i[1].getY() + i[1].block.getY() + 5;
-            g.drawLine(x1, y1, x2, y2);
+            double x1 = i[0].getX() + i[0].block.getX() + 5;
+            double y1 = i[0].getY() + i[0].block.getY() + 5;
+            double x2 = i[1].getX() + i[1].block.getX() + 5;
+            double y2 = i[1].getY() + i[1].block.getY() + 5;
+            drawAL(x1, y1, x2, y2, g2, "generalizationLines");
         }
         for (Port[] i : compositionLines) {
             int x1 = i[0].getX() + i[0].block.getX() + 5;
             int y1 = i[0].getY() + i[0].block.getY() + 5;
             int x2 = i[1].getX() + i[1].block.getX() + 5;
             int y2 = i[1].getY() + i[1].block.getY() + 5;
-            g.drawLine(x1, y1, x2, y2);
+            g2.drawLine(x1, y1, x2, y2);
         }
     }
 
@@ -189,5 +191,51 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
         selectedGroup = null;
         revalidate();
         repaint();
+    }
+
+    public static void drawAL(double sx, double sy, double ex, double ey,
+            Graphics2D g2, String type) {
+
+        double H = 10;
+        double L = 4;
+        double awrad = Math.atan(L / H);
+        double arraow_len = Math.sqrt(L * L + H * H);
+        double[] arrXY_1 = rotateVec(ex - sx, ey - sy, awrad, true, arraow_len);
+        double[] arrXY_2 = rotateVec(ex - sx, ey - sy, -awrad, true, arraow_len);
+        double x_3 = ex - arrXY_1[0];
+        double y_3 = ey - arrXY_1[1];
+        double x_4 = ex - arrXY_2[0];
+        double y_4 = ey - arrXY_2[1];
+        int x3 = (int) x_3;
+        int y3 = (int) y_3;
+        int x4 = (int) x_4;
+        int y4 = (int) y_4;
+        g2.drawLine((int) sx, (int) sy, (int) ex, (int) ey);
+        if (type == "AssociationLines") {
+            g2.drawLine((int) ex, (int) ey, (int) x3, (int) y3);
+            g2.drawLine((int) ex, (int) ey, (int) x4, (int) y4);
+        } else if (type == "generalizationLines") {
+            GeneralPath triangle = new GeneralPath();
+            triangle.moveTo(ex, ey);
+            triangle.lineTo(x3, y3);
+            triangle.lineTo(x4, y4);
+            triangle.closePath();
+            g2.draw(triangle);
+        }
+    }
+
+    public static double[] rotateVec(double e, double f, double ang,
+            boolean isChLen, double newLen) {
+        double mathstr[] = new double[2];
+        double vx = e * Math.cos(ang) - f * Math.sin(ang);
+        double vy = e * Math.sin(ang) + f * Math.cos(ang);
+        if (isChLen) {
+            double d = Math.sqrt(vx * vx + vy * vy);
+            vx = vx / d * newLen;
+            vy = vy / d * newLen;
+            mathstr[0] = vx;
+            mathstr[1] = vy;
+        }
+        return mathstr;
     }
 }
