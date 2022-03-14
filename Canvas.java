@@ -130,11 +130,11 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
             drawAL(x1, y1, x2, y2, g2, "generalizationLines");
         }
         for (Port[] i : compositionLines) {
-            int x1 = i[0].getX() + i[0].block.getX() + 5;
-            int y1 = i[0].getY() + i[0].block.getY() + 5;
-            int x2 = i[1].getX() + i[1].block.getX() + 5;
-            int y2 = i[1].getY() + i[1].block.getY() + 5;
-            g2.drawLine(x1, y1, x2, y2);
+            double x1 = i[0].getX() + i[0].block.getX() + 5;
+            double y1 = i[0].getY() + i[0].block.getY() + 5;
+            double x2 = i[1].getX() + i[1].block.getX() + 5;
+            double y2 = i[1].getY() + i[1].block.getY() + 5;
+            drawAL(x1, y1, x2, y2, g2, "compositionLines");
         }
     }
 
@@ -195,8 +195,15 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
 
     public static void drawAL(double sx, double sy, double ex, double ey,
             Graphics2D g2, String type) {
-        double H = 12;
-        double L = 8;
+        double H;
+        double L;
+        if (type == "compositionLines") {
+            H = 10;
+            L = 6;
+        } else {
+            H = 12;
+            L = 8;
+        }
         double awrad = Math.atan(L / H);
         double arraow_len = Math.sqrt(L * L + H * H);
         double[] arrXY_1 = rotateVec(ex - sx, ey - sy, awrad, true, arraow_len);
@@ -205,22 +212,28 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
         double y_3 = ey - arrXY_1[1];
         double x_4 = ex - arrXY_2[0];
         double y_4 = ey - arrXY_2[1];
-        int x3 = (int) x_3;
-        int y3 = (int) y_3;
-        int x4 = (int) x_4;
-        int y4 = (int) y_4;
         if (type == "AssociationLines") {
             g2.drawLine((int) sx, (int) sy, (int) ex, (int) ey);
-            g2.drawLine((int) ex, (int) ey, (int) x3, (int) y3);
-            g2.drawLine((int) ex, (int) ey, (int) x4, (int) y4);
+            g2.drawLine((int) ex, (int) ey, (int) x_3, (int) y_3);
+            g2.drawLine((int) ex, (int) ey, (int) x_4, (int) y_4);
         } else if (type == "generalizationLines") {
             GeneralPath triangle = new GeneralPath();
             triangle.moveTo(ex, ey);
-            triangle.lineTo(x3, y3);
-            triangle.lineTo(x4, y4);
+            triangle.lineTo(x_3, y_3);
+            triangle.lineTo(x_4, y_4);
             triangle.closePath();
             g2.draw(triangle);
             g2.drawLine((int) sx, (int) sy, (int) (x_3 + (x_4 - x_3) / 2), (int) (y_3 + (y_4 - y_3) / 2));
+        } else {
+            double x_5 = x_3 + (x_4 - x_3) / 2;
+            double y_5 = y_3 + (y_4 - y_3) / 2;
+            double x_6 = ex - (ex - x_5) * 2;
+            double y_6 = ey - (ey - y_5) * 2;
+            g2.drawLine((int) sx, (int) sy, (int) x_6, (int) y_6);
+            g2.drawLine((int) ex, (int) ey, (int) x_3, (int) y_3);
+            g2.drawLine((int) ex, (int) ey, (int) x_4, (int) y_4);
+            g2.drawLine((int) x_6, (int) y_6, (int) x_3, (int) y_3);
+            g2.drawLine((int) x_6, (int) y_6, (int) x_4, (int) y_4);
         }
     }
 
