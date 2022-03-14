@@ -190,8 +190,11 @@ public class Frame extends JFrame {
         changeObjectName.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (canvas.renameCandidateBlock != null) {
+                    String tmp = canvas.renameCandidateBlock.title.getText();
                     JFrame popwindow = new JFrame();
                     String newTitle = JOptionPane.showInputDialog(popwindow, "輸入title");
+                    if (newTitle == null)
+                        newTitle = tmp;
                     canvas.renameCandidateBlock.setTitle(newTitle);
                 }
             }

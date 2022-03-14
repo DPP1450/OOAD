@@ -4,7 +4,7 @@ import java.awt.event.*;
 
 public class Block extends JPanel implements MouseListener, MouseMotionListener {
 
-    private JLabel title;
+    public JLabel title;
     private boolean selected;
     public Point P;
     public Point moveStartPoint;
