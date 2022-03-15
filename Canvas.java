@@ -155,7 +155,10 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
         double yMax = Math.max(selectStartPoint.getY(), selectEndPoint.getY());
         double yMin = Math.min(selectStartPoint.getY(), selectEndPoint.getY());
         for (Block i : blocks) {
-            if (i.getX() >= xMin && i.getX() <= xMax && i.getY() >= yMin && i.getY() <= yMax) {
+            if (i.getX() >= xMin && i.getX() <= xMax && i.getY() >= yMin && i.getY() <= yMax
+                    && i.getX() + i.p5.getX() >= xMin
+                    && i.getX() + i.p5.getX() <= xMax && i.getY() + i.p5.getY() >= yMin
+                    && i.p5.getY() + i.getY() <= yMax) {
                 i.setPortVisible(true);
                 if (i.parent == null)
                     selectedBlock.add(i);

@@ -16,6 +16,7 @@ public class Block extends JPanel implements MouseListener, MouseMotionListener 
     Port p2;
     Port p3;
     Port p4;
+    Port p5; // select功能邊界確認
 
     Block(Canvas canvas, String type) {
         this.type = type;
@@ -25,6 +26,7 @@ public class Block extends JPanel implements MouseListener, MouseMotionListener 
         p2 = new Port(this);
         p3 = new Port(this);
         p4 = new Port(this);
+        p5 = new Port(this);
         this.setTitle("Title");
         this.setLayout(null);
         this.setBackground(Color.WHITE);
@@ -34,9 +36,11 @@ public class Block extends JPanel implements MouseListener, MouseMotionListener 
         this.add(p2);
         this.add(p3);
         this.add(p4);
+        this.add(p5);
         this.add(title);
         canvas.moveToFront(this);
         setPortVisible(false);
+        p5.setVisible(false);
         parent = null;
         if (type == "Class") {
             this.setSize(80, 120);
@@ -46,6 +50,7 @@ public class Block extends JPanel implements MouseListener, MouseMotionListener 
             p2.setLocation(40, 110);
             p3.setLocation(0, 60);
             p4.setLocation(70, 60);
+            p5.setLocation(70, 110);
         }
         if (type == "Oval") {
             this.setSize(80, 60);
@@ -55,6 +60,7 @@ public class Block extends JPanel implements MouseListener, MouseMotionListener 
             p2.setLocation(70, 30);
             p3.setLocation(30, 0);
             p4.setLocation(30, 50);
+            p5.setLocation(70, 50);
         }
     }
 
