@@ -12,14 +12,14 @@ public class Frame extends JFrame {
     private JMenuItem changeObjectName;
     private JMenu edit;
     private JPanel functionSelect;
-    public JButton select;
-    public JButton associationLine;
-    public JButton generalizationLine;
-    public JButton compositionLine;
-    public JButton classBtn;
-    public JButton useCase;
-    public JButton function;
-    public ArrayList<JButton> buttonList;
+    public FunctionButton select;
+    public FunctionButton associationLine;
+    public FunctionButton generalizationLine;
+    public FunctionButton compositionLine;
+    public FunctionButton classBtn;
+    public FunctionButton useCase;
+    public FunctionButton function;
+    public ArrayList<FunctionButton> buttonList;
 
     Frame() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,7 +29,7 @@ public class Frame extends JFrame {
         this.setVisible(true);
         this.getContentPane().setBackground(Color.gray);
         this.setLayout(null);
-        buttonList = new ArrayList<JButton>();
+        buttonList = new ArrayList<FunctionButton>();
         functionSelect = new JPanel();
         ButtonGroup = new JMenuItem("group");
         ButtonUngroup = new JMenuItem("ungroup");
@@ -38,72 +38,19 @@ public class Frame extends JFrame {
         menuBar = new JMenuBar();
         canvas = new Canvas(this);
         functionSelect = new JPanel();
-        select = new JButton("select");
-        select.setOpaque(true);
-        select.setBackground(Color.WHITE);
-        select.setForeground(Color.BLACK);
-        associationLine = new JButton("association line");
-        associationLine.setOpaque(true);
-        associationLine.setBackground(Color.WHITE);
-        associationLine.setForeground(Color.BLACK);
-        generalizationLine = new JButton("generalization line");
-        generalizationLine.setOpaque(true);
-        generalizationLine.setBackground(Color.WHITE);
-        generalizationLine.setForeground(Color.BLACK);
-        compositionLine = new JButton("composition line");
-        compositionLine.setOpaque(true);
-        compositionLine.setBackground(Color.WHITE);
-        compositionLine.setForeground(Color.BLACK);
-        classBtn = new JButton("class");
-        classBtn.setOpaque(true);
-        classBtn.setBackground(Color.WHITE);
-        classBtn.setForeground(Color.BLACK);
-        useCase = new JButton("use case");
-        useCase.setOpaque(true);
-        useCase.setBackground(Color.WHITE);
-        useCase.setForeground(Color.BLACK);
-        buttonList = new ArrayList<JButton>();
+        select = new FunctionButton("select", this);
+        associationLine = new FunctionButton("association line", this);
+        generalizationLine = new FunctionButton("generalization line", this);
+        compositionLine = new FunctionButton("composition line", this);
+        classBtn = new FunctionButton("class", this);
+        useCase = new FunctionButton("use case", this);
+        buttonList = new ArrayList<FunctionButton>();
         buttonList.add(select);
         buttonList.add(associationLine);
         buttonList.add(generalizationLine);
         buttonList.add(compositionLine);
         buttonList.add(classBtn);
         buttonList.add(useCase);
-        select.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                changeFunction(select);
-            }
-        });
-        associationLine.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                changeFunction(associationLine);
-            }
-        });
-
-        generalizationLine.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                changeFunction(generalizationLine);
-            }
-        });
-
-        compositionLine.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                changeFunction(compositionLine);
-            }
-        });
-
-        classBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                changeFunction(classBtn);
-            }
-        });
-
-        useCase.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                changeFunction(useCase);
-            }
-        });
-
         ButtonGroup.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (function == select) {
@@ -166,7 +113,7 @@ public class Frame extends JFrame {
         validate();
     }
 
-    private void changeFunction(JButton selectFunction) {
+    public void changeFunction(FunctionButton selectFunction) {
         if (function == selectFunction) {
             selectFunction.setBackground(Color.WHITE);
             function = null;
