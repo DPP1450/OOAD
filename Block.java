@@ -12,14 +12,14 @@ public class Block extends JPanel implements MouseListener, MouseMotionListener 
     public Composite parent;
     public String type;
     public double parentDistanceX, parentDistanceY;
+    public int height, width;
     Port p1;
     Port p2;
     Port p3;
     Port p4;
     Port p5; // select功能邊界確認
 
-    Block(Canvas canvas, String type) {
-        this.type = type;
+    Block(Canvas canvas) {
         title = new JLabel();
         this.canvas = canvas;
         p1 = new Port(this);
@@ -42,44 +42,6 @@ public class Block extends JPanel implements MouseListener, MouseMotionListener 
         setPortVisible(false);
         p5.setVisible(false);
         parent = null;
-        if (type == "Class") {
-            this.setSize(80, 120);
-            title.setSize(70, 30);
-            title.setLocation(10, 10);
-            p1.setLocation(40, 0);
-            p2.setLocation(40, 110);
-            p3.setLocation(0, 60);
-            p4.setLocation(70, 60);
-            p5.setLocation(70, 110);
-        }
-        if (type == "Oval") {
-            this.setSize(80, 60);
-            title.setSize(60, 20);
-            title.setLocation(25, 15);
-            p1.setLocation(0, 30);
-            p2.setLocation(70, 30);
-            p3.setLocation(30, 0);
-            p4.setLocation(30, 50);
-            p5.setLocation(70, 50);
-        }
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.setColor(Color.black);
-        if (type == "Class") {
-            g.drawLine(5, 5, 5, 115);
-            g.drawLine(75, 5, 75, 115);
-            g.drawLine(5, 5, 75, 5);
-            g.drawLine(5, 5, 75, 5);
-            g.drawLine(5, 40, 75, 40);
-            g.drawLine(5, 80, 75, 80);
-            g.drawLine(5, 115, 75, 115);
-        }
-        if (type == "Oval") {
-            g.drawOval(5, 5, 70, 50);
-        }
     }
 
     public void setTitle(String s) {

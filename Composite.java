@@ -81,17 +81,10 @@ public class Composite extends JPanel implements MouseListener, MouseMotionListe
     private void findBound() {
         for (Block i : subBlock) {
             i.parent = this;
-            if (i.type == "Class") {
-                xMin = Math.min(i.getX(), xMin);
-                xMax = Math.max(i.getX() + 80, xMax);
-                yMin = Math.min(i.getY(), yMin);
-                yMax = Math.max(i.getY() + 120, yMax);
-            } else {
-                xMin = Math.min(i.getX(), xMin);
-                xMax = Math.max(i.getX() + 80, xMax);
-                yMin = Math.min(i.getY(), yMin);
-                yMax = Math.max(i.getY() + 60, yMax);
-            }
+            xMin = Math.min(i.getX(), xMin);
+            xMax = Math.max(i.getX() + i.width, xMax);
+            yMin = Math.min(i.getY(), yMin);
+            yMax = Math.max(i.getY() + i.height, yMax);
         }
         for (Composite i : subComposite) {
             i.parent = this;

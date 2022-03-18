@@ -78,7 +78,7 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
             SwingUtilities.convertPointFromScreen(p, this);
             int X = (int) p.getX();
             int Y = (int) p.getLocation().getY();
-            Block newBlock = new Block(this, "Class");
+            Block newBlock = new Rectangle(this);
             this.add(newBlock, 0);
             newBlock.setLocation(X, Y);
             blocks.add(newBlock);
@@ -88,7 +88,7 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
             SwingUtilities.convertPointFromScreen(p, this);
             int X = (int) p.getX();
             int Y = (int) p.getLocation().getY();
-            Block newBlock = new Block(this, "Oval");
+            Block newBlock = new Oval(this);
             this.add(newBlock, 0);
             newBlock.setLocation(X, Y);
             blocks.add(newBlock);
