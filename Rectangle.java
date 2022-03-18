@@ -13,7 +13,7 @@ public class Rectangle extends Block {
         super.p4.setLocation(70, 60);
         super.p5.setLocation(70, 110);
         super.height = 120;
-        super.width = 60;
+        super.width = 80;
     }
 
     @Override

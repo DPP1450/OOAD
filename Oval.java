@@ -12,8 +12,8 @@ public class Oval extends Block {
         super.p3.setLocation(30, 0);
         super.p4.setLocation(30, 50);
         super.p5.setLocation(70, 50);
-        super.height = 80;
-        super.width = 60;
+        super.height = 60;
+        super.width = 80;
     }
 
     @Override
