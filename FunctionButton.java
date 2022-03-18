@@ -6,7 +6,7 @@ class FunctionButton extends JButton {
     Frame frame;
 
     FunctionButton(String s, Frame frame) {
-        this.setText(s);
+        super(s);
         this.frame = frame;
         this.setOpaque(true);
         this.setBackground(Color.WHITE);
