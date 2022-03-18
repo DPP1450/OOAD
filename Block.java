@@ -10,7 +10,6 @@ public class Block extends JPanel implements MouseListener, MouseMotionListener 
     public Point moveStartPoint;
     private Canvas canvas;
     public Composite parent;
-    public String type;
     public double parentDistanceX, parentDistanceY;
     public int height, width;
     Port p1;
