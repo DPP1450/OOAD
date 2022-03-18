@@ -18,7 +18,7 @@ class FunctionButton extends JButton {
         });
     }
 
-    void changeFunction() {
+    private void changeFunction() {
         frame.changeFunction(this);
     }
 }
