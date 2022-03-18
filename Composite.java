@@ -44,17 +44,17 @@ public class Composite extends JPanel implements MouseListener, MouseMotionListe
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (canvas.frame.function == "select" && parent == null) {
+        if (canvas.frame.function == canvas.frame.select && parent == null) {
             getStartPoint();
         }
-        if (canvas.frame.function == "select" && parent != null) {
+        if (canvas.frame.function == canvas.frame.select && parent != null) {
             findParent().getStartPoint();
         }
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (canvas.frame.function == "select")
+        if (canvas.frame.function == canvas.frame.select)
             canvas.selectedGroup = findParent();
     }
 
@@ -65,10 +65,10 @@ public class Composite extends JPanel implements MouseListener, MouseMotionListe
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        if (canvas.frame.function == "select" && parent == null) {
+        if (canvas.frame.function == canvas.frame.select && parent == null) {
             move();
         }
-        if (canvas.frame.function == "select" && parent != null) {
+        if (canvas.frame.function == canvas.frame.select && parent != null) {
             findParent().move();
         }
     }

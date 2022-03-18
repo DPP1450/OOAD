@@ -96,8 +96,9 @@ public class Block extends JPanel implements MouseListener, MouseMotionListener 
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        if (canvas.frame.function == "associationLine" || canvas.frame.function == "generalizationLine"
-                || canvas.frame.function == "compositionLine") {
+        if (canvas.frame.function == canvas.frame.associationLine
+                || canvas.frame.function == canvas.frame.generalizationLine
+                || canvas.frame.function == canvas.frame.compositionLine) {
             if (canvas.lineStartPoint != null && canvas.lineEndBlock != null) {
                 Port shortestPort = canvas.lineEndBlock.findShortestPort();
                 canvas.addLine(canvas.lineStartPoint, shortestPort);
@@ -108,30 +109,32 @@ public class Block extends JPanel implements MouseListener, MouseMotionListener 
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        if (canvas.frame.function == "associationLine" || canvas.frame.function == "generalizationLine"
-                || canvas.frame.function == "compositionLine" && canvas.lineStartPoint != null) {
+        if (canvas.frame.function == canvas.frame.associationLine
+                || canvas.frame.function == canvas.frame.generalizationLine
+                || canvas.frame.function == canvas.frame.compositionLine && canvas.lineStartPoint != null) {
             canvas.lineEndBlock = this;
         }
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (canvas.frame.function == "select" && parent == null) {
+        if (canvas.frame.function == canvas.frame.select && parent == null) {
             moveStartPoint = MouseInfo.getPointerInfo().getLocation();
             SwingUtilities.convertPointFromScreen(moveStartPoint, this);
         }
-        if (canvas.frame.function == "select" && parent != null) {
+        if (canvas.frame.function == canvas.frame.select && parent != null) {
             findParent().getStartPoint();
         }
-        if (canvas.frame.function == "associationLine" || canvas.frame.function == "generalizationLine"
-                || canvas.frame.function == "compositionLine") {
+        if (canvas.frame.function == canvas.frame.associationLine
+                || canvas.frame.function == canvas.frame.generalizationLine
+                || canvas.frame.function == canvas.frame.compositionLine) {
             canvas.lineStartPoint = findShortestPort();
         }
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (canvas.frame.function == "select") {
+        if (canvas.frame.function == canvas.frame.select) {
             if (parent == null)
                 canvas.moveToFront(this);
             canvas.renameCandidateBlock = this;
@@ -145,15 +148,16 @@ public class Block extends JPanel implements MouseListener, MouseMotionListener 
 
     @Override
     public void mouseExited(MouseEvent e) {
-        if (canvas.frame.function == "associationLine" || canvas.frame.function == "generalizationLine"
-                || canvas.frame.function == "compositionLine") {
+        if (canvas.frame.function == canvas.frame.associationLine
+                || canvas.frame.function == canvas.frame.generalizationLine
+                || canvas.frame.function == canvas.frame.compositionLine) {
             canvas.lineEndBlock = null;
         }
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        if (canvas.frame.function == "select" && parent == null) {
+        if (canvas.frame.function == canvas.frame.select && parent == null) {
             canvas.moveToFront(this);
             P = MouseInfo.getPointerInfo().getLocation();
             SwingUtilities.convertPointFromScreen(P, canvas);
@@ -161,7 +165,7 @@ public class Block extends JPanel implements MouseListener, MouseMotionListener 
                     (int) (P.getY() - moveStartPoint.getY()));
             canvas.repaint();
         }
-        if (canvas.frame.function == "select" && parent != null) {
+        if (canvas.frame.function == canvas.frame.select && parent != null) {
             findParent().move();
         }
     }

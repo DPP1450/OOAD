@@ -44,7 +44,7 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        if (frame.function == "select") {
+        if (frame.function == frame.select) {
             selectedBlock.clear();
             selectedComposite.clear();
             selectEndPoint = MouseInfo.getPointerInfo().getLocation();
@@ -60,7 +60,7 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (frame.function == "select") {
+        if (frame.function == frame.select) {
             selectedBlock.clear();
             selectedComposite.clear();
             selectStartPoint = MouseInfo.getPointerInfo().getLocation();
@@ -73,7 +73,7 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (frame.function == "class") {
+        if (frame.function == frame.classBtn) {
             Point p = MouseInfo.getPointerInfo().getLocation();
             SwingUtilities.convertPointFromScreen(p, this);
             int X = (int) p.getX();
@@ -83,7 +83,7 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
             newBlock.setLocation(X, Y);
             blocks.add(newBlock);
         }
-        if (frame.function == "useCase") {
+        if (frame.function == frame.useCase) {
             Point p = MouseInfo.getPointerInfo().getLocation();
             SwingUtilities.convertPointFromScreen(p, this);
             int X = (int) p.getX();
@@ -140,9 +140,9 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
 
     public void addLine(Port p1, Port p2) {
         Port[] tmp = { p1, p2 };
-        if (frame.function == "associationLine")
+        if (frame.function == frame.associationLine)
             AssociationLines.add(tmp);
-        else if (frame.function == "generalizationLine")
+        else if (frame.function == frame.generalizationLine)
             generalizationLines.add(tmp);
         else
             compositionLines.add(tmp);
