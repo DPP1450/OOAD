@@ -1,9 +1,2 @@
 .vscode
-Block.class
-Canvas.class
-Composite.class
-Frame.class
-Port.class
-Uml.class
-Rectangle.class
-Oval.class
+*.class
