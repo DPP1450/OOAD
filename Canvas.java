@@ -111,7 +111,7 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
     }
 
     @Override
-    public void paint(Graphics g) { // 要改成不同的線
+    public void paint(Graphics g) {
         super.paint(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.BLACK);

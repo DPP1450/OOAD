@@ -16,7 +16,7 @@ public class Block extends JPanel implements MouseListener, MouseMotionListener 
     Port p2;
     Port p3;
     Port p4;
-    Port p5; // select功能邊界確認
+    Port p5;
 
     Block(Canvas canvas) {
         title = new JLabel();
