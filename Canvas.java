@@ -88,7 +88,10 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
             else
                 newBlock = new Oval(this);
             this.add(newBlock, 0);
-            newBlock.setLocation(X, Y);
+            if (frame.function == frame.classBtn)
+                newBlock.setLocation(X, Y);
+            else
+                newBlock.setLocation(X - 40, Y);
             blocks.add(newBlock);
         }
     }
