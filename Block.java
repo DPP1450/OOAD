@@ -105,6 +105,7 @@ public class Block extends JPanel implements MouseListener, MouseMotionListener 
             setPortVisible(true);
             canvas.selectedGroup = findParent();
         }
+        canvas.addBlock();
     }
 
     @Override

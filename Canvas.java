@@ -73,6 +73,10 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        addBlock();
+    }
+
+    public void addBlock() {
         if (frame.function == frame.classBtn) {
             Point p = MouseInfo.getPointerInfo().getLocation();
             SwingUtilities.convertPointFromScreen(p, this);
