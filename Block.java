@@ -12,6 +12,7 @@ public class Block extends JPanel implements MouseListener, MouseMotionListener 
     public Composite parent;
     public double parentDistanceX, parentDistanceY;
     public int height, width;
+    // private Polygon poly1, poly2, poly3;
     Port p1;
     Port p2;
     Port p3;
@@ -63,7 +64,7 @@ public class Block extends JPanel implements MouseListener, MouseMotionListener 
                 || canvas.frame.function == canvas.frame.compositionLine) {
             if (canvas.lineStartPoint != null && canvas.lineEndBlock != null) {
                 Port shortestPort = canvas.lineEndBlock.findPort();
-                if (canvas.lineStartPoint != shortestPort)
+                if (canvas.lineStartPoint.block != shortestPort.block)
                     canvas.addLine(canvas.lineStartPoint, shortestPort);
                 canvas.lineStartPoint = null;
             }
@@ -148,26 +149,49 @@ public class Block extends JPanel implements MouseListener, MouseMotionListener 
         canvas.repaint();
     }
 
+    // private void initPoly() {
+    // // poly1 = new Polygon();
+    // // poly2 = new Polygon();
+    // // poly3 = new Polygon();
+
+    // // poly1.addPoint(0, 0);
+    // // poly1.addPoint(p4.getX(), 0);
+    // // poly1.addPoint(p1.getX(), p4.getY());
+
+    // // poly2.addPoint(0, p2.getY());
+    // // poly2.addPoint(p4.getX(), p2.getY());
+    // // poly2.addPoint(p1.getX(), p4.getY());
+
+    // // poly3.addPoint(0, 0);
+    // // poly3.addPoint(0, p2.getY());
+    // // poly3.addPoint(p1.getX(), p4.getY());
+    // }
+
     public Port findPort() {
         P = MouseInfo.getPointerInfo().getLocation();
         SwingUtilities.convertPointFromScreen(P, this);
-        Polygon polygon = new Polygon();
-        polygon.addPoint(0, 0);
-        polygon.addPoint(p4.getX(), 0);
-        polygon.addPoint(p1.getX(), p4.getY());
-        if (polygon.contains(P))
+        Polygon poly1, poly2, poly3;
+        poly1 = new Polygon();
+        poly2 = new Polygon();
+        poly3 = new Polygon();
+
+        poly1.addPoint(5, 5);
+        poly1.addPoint(p4.getX() + 5, 5);
+        poly1.addPoint(p1.getX() + 5, p4.getY() + 5);
+
+        poly2.addPoint(5, p2.getY() + 5);
+        poly2.addPoint(p4.getX() + 5, p2.getY() + 5);
+        poly2.addPoint(p1.getX() + 5, p4.getY() + 5);
+
+        poly3.addPoint(5, 5);
+        poly3.addPoint(5, p2.getY() + 5);
+        poly3.addPoint(p1.getX() + 5, p4.getY() + 5);
+
+        if (poly1.contains(P))
             return p1;
-        polygon.reset();
-        polygon.addPoint(0, p2.getY());
-        polygon.addPoint(p4.getX(), p2.getY());
-        polygon.addPoint(p1.getX(), p4.getY());
-        if (polygon.contains(P))
+        if (poly2.contains(P))
             return p2;
-        polygon.reset();
-        polygon.addPoint(0, 0);
-        polygon.addPoint(0, p2.getY());
-        polygon.addPoint(p1.getX(), p4.getY());
-        if (polygon.contains(P))
+        if (poly3.contains(P))
             return p3;
         return p4;
     }
