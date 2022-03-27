@@ -51,6 +51,45 @@ public class Frame extends JFrame {
         buttonList.add(compositionLine);
         buttonList.add(classBtn);
         buttonList.add(useCase);
+        edit.add(ButtonGroup);
+        edit.add(ButtonUngroup);
+        edit.add(changeObjectName);
+        menuBar.add(edit);
+        this.add(functionSelect);
+        this.add(menuBar);
+        this.add(canvas);
+        this.add(functionSelect);
+        this.setJMenuBar(menuBar);
+        functionSelect.setLayout(null);
+        functionSelect.setBackground(Color.gray);
+        functionSelect.add(select);
+        functionSelect.add(associationLine);
+        functionSelect.add(generalizationLine);
+        functionSelect.add(compositionLine);
+        functionSelect.add(classBtn);
+        functionSelect.add(useCase);
+        initLayout();
+        groupAddActionListener();
+        validate();
+    }
+
+    public void changeFunction(FunctionButton selectFunction) {
+        if (function == selectFunction) {
+            selectFunction.setBackground(Color.WHITE);
+            function = null;
+        } else {
+            function = selectFunction;
+            selectFunction.setBackground(Color.RED);
+            for (JButton i : buttonList) {
+                if (i != selectFunction) {
+                    i.setSelected(false);
+                    i.setBackground(Color.WHITE);
+                }
+            }
+        }
+    }
+
+    private void groupAddActionListener() {
         ButtonGroup.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (function == select) {
@@ -77,22 +116,9 @@ public class Frame extends JFrame {
                 }
             }
         });
-        edit.add(ButtonGroup);
-        edit.add(ButtonUngroup);
-        edit.add(changeObjectName);
-        menuBar.add(edit);
-        this.add(functionSelect);
-        this.add(menuBar);
-        this.add(canvas);
-        this.add(functionSelect);
-        functionSelect.setLayout(null);
-        functionSelect.setBackground(Color.gray);
-        functionSelect.add(select);
-        functionSelect.add(associationLine);
-        functionSelect.add(generalizationLine);
-        functionSelect.add(compositionLine);
-        functionSelect.add(classBtn);
-        functionSelect.add(useCase);
+    }
+
+    private void initLayout() {
         select.setSize(140, 60);
         select.setLocation(0, 20);
         associationLine.setSize(140, 60);
@@ -109,23 +135,5 @@ public class Frame extends JFrame {
         canvas.setLocation(140, 10);
         functionSelect.setSize(140, 700);
         functionSelect.setLocation(0, 20);
-        this.setJMenuBar(menuBar);
-        validate();
-    }
-
-    public void changeFunction(FunctionButton selectFunction) {
-        if (function == selectFunction) {
-            selectFunction.setBackground(Color.WHITE);
-            function = null;
-        } else {
-            function = selectFunction;
-            selectFunction.setBackground(Color.RED);
-            for (JButton i : buttonList) {
-                if (i != selectFunction) {
-                    i.setSelected(false);
-                    i.setBackground(Color.WHITE);
-                }
-            }
-        }
     }
 }
