@@ -150,22 +150,25 @@ public class Block extends JPanel implements MouseListener, MouseMotionListener 
     public Port findPort() {
         P = MouseInfo.getPointerInfo().getLocation();
         SwingUtilities.convertPointFromScreen(P, this);
-        Port retPort = null;
-        int X = (int) P.getX();
-        int Y = (int) P.getY();
-        double minn = Math.pow(p1.getX() - X, 2) + Math.pow(p1.getY() - Y, 2);
-        if (Math.pow(p2.getX() - X, 2) + Math.pow(p2.getY() - Y, 2) < minn) {
-            retPort = p2;
-            minn = Math.pow(p2.getX() - X, 2) + Math.pow(p2.getY() - Y, 2);
-        }
-        if (Math.pow(p3.getX() - X, 2) + Math.pow(p3.getY() - Y, 2) < minn) {
-            retPort = p3;
-            minn = Math.pow(p3.getX() - X, 2) + Math.pow(p3.getY() - Y, 2);
-        }
-        if (Math.pow(p4.getX() - X, 2) + Math.pow(p4.getY() - Y, 2) < minn) {
-            retPort = p4;
-        }
-        return retPort;
+        Polygon polygon = new Polygon();
+        polygon.addPoint(0, 0);
+        polygon.addPoint(p4.getX(), 0);
+        polygon.addPoint(p1.getX(), p4.getY());
+        if (polygon.contains(P))
+            return p1;
+        polygon.reset();
+        polygon.addPoint(0, p2.getY());
+        polygon.addPoint(p4.getX(), p2.getY());
+        polygon.addPoint(p1.getX(), p4.getY());
+        if (polygon.contains(P))
+            return p2;
+        polygon.reset();
+        polygon.addPoint(0, 0);
+        polygon.addPoint(0, p2.getY());
+        polygon.addPoint(p1.getX(), p4.getY());
+        if (polygon.contains(P))
+            return p3;
+        return p4;
     }
 
     public Composite findParent() {
