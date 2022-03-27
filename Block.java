@@ -150,30 +150,31 @@ public class Block extends JPanel implements MouseListener, MouseMotionListener 
     }
 
     // private void initPoly() {
-    // // poly1 = new Polygon();
-    // // poly2 = new Polygon();
-    // // poly3 = new Polygon();
+    // poly1 = new Polygon();
+    // poly2 = new Polygon();
+    // poly3 = new Polygon();
 
-    // // poly1.addPoint(0, 0);
-    // // poly1.addPoint(p4.getX(), 0);
-    // // poly1.addPoint(p1.getX(), p4.getY());
+    // poly1.addPoint(5, 5);
+    // poly1.addPoint(p4.getX() + 5, 5);
+    // poly1.addPoint(p1.getX() + 5, p4.getY() + 5);
 
-    // // poly2.addPoint(0, p2.getY());
-    // // poly2.addPoint(p4.getX(), p2.getY());
-    // // poly2.addPoint(p1.getX(), p4.getY());
+    // poly2.addPoint(5, p2.getY() + 5);
+    // poly2.addPoint(p4.getX() + 5, p2.getY() + 5);
+    // poly2.addPoint(p1.getX() + 5, p4.getY() + 5);
 
-    // // poly3.addPoint(0, 0);
-    // // poly3.addPoint(0, p2.getY());
-    // // poly3.addPoint(p1.getX(), p4.getY());
+    // poly3.addPoint(5, 5);
+    // poly3.addPoint(5, p2.getY() + 5);
+    // poly3.addPoint(p1.getX() + 5, p4.getY() + 5);
     // }
 
     public Port findPort() {
         P = MouseInfo.getPointerInfo().getLocation();
         SwingUtilities.convertPointFromScreen(P, this);
-        Polygon poly1, poly2, poly3;
+        Polygon poly1, poly2, poly3, poly4;
         poly1 = new Polygon();
         poly2 = new Polygon();
         poly3 = new Polygon();
+        poly4 = new Polygon();
 
         poly1.addPoint(5, 5);
         poly1.addPoint(p4.getX() + 5, 5);
@@ -187,13 +188,20 @@ public class Block extends JPanel implements MouseListener, MouseMotionListener 
         poly3.addPoint(5, p2.getY() + 5);
         poly3.addPoint(p1.getX() + 5, p4.getY() + 5);
 
+        poly4.addPoint(p4.getX() + 5, 5);
+        poly4.addPoint(p4.getX() + 5, p2.getY() + 5);
+        poly4.addPoint(p1.getX() + 5, p4.getY() + 5);
+
         if (poly1.contains(P))
             return p1;
         if (poly2.contains(P))
             return p2;
         if (poly3.contains(P))
             return p3;
-        return p4;
+        if (poly4.contains(P))
+            return p4;
+        System.out.println("ERROR");
+        return null;
     }
 
     public Composite findParent() {
