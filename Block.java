@@ -200,8 +200,26 @@ public class Block extends JPanel implements MouseListener, MouseMotionListener 
             return p3;
         if (poly4.contains(P))
             return p4;
-        System.out.println("ERROR");
-        return null;
+        return findShortestPort(P);
+    }
+
+    public Port findShortestPort(Point P) {
+        Port shortestPort = p1;
+        int X = (int) P.getX();
+        int Y = (int) P.getY();
+        double minn = Math.pow(p1.getX() - X, 2) + Math.pow(p1.getY() - Y, 2);
+        if (Math.pow(p2.getX() - X, 2) + Math.pow(p2.getY() - Y, 2) < minn) {
+            shortestPort = p2;
+            minn = Math.pow(p2.getX() - X, 2) + Math.pow(p2.getY() - Y, 2);
+        }
+        if (Math.pow(p3.getX() - X, 2) + Math.pow(p3.getY() - Y, 2) < minn) {
+            shortestPort = p3;
+            minn = Math.pow(p3.getX() - X, 2) + Math.pow(p3.getY() - Y, 2);
+        }
+        if (Math.pow(p4.getX() - X, 2) + Math.pow(p4.getY() - Y, 2) < minn) {
+            shortestPort = p4;
+        }
+        return shortestPort;
     }
 
     public Composite findParent() {
