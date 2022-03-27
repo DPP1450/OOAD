@@ -224,7 +224,6 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
             triangle.lineTo(x_4, y_4);
             triangle.closePath();
             g2.draw(triangle);
-            g2.fill(triangle);
             g2.drawLine((int) sx, (int) sy, (int) (x_3 + (x_4 - x_3) / 2), (int) (y_3 + (y_4 - y_3) / 2));
         } else {
             double x_5 = x_3 + (x_4 - x_3) / 2;

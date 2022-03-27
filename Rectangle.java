@@ -15,6 +15,7 @@ public class Rectangle extends Block {
         super.p5.setLocation(70, 110);
         super.height = 120;
         super.width = 80;
+        super.initPoly();
     }
 
     @Override

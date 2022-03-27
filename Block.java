@@ -12,7 +12,7 @@ public class Block extends JPanel implements MouseListener, MouseMotionListener 
     public Composite parent;
     public double parentDistanceX, parentDistanceY;
     public int height, width;
-    // private Polygon poly1, poly2, poly3;
+    private Polygon poly1, poly2, poly3, poly4;
     Port p1;
     Port p2;
     Port p3;
@@ -27,6 +27,10 @@ public class Block extends JPanel implements MouseListener, MouseMotionListener 
         p3 = new Port(this);
         p4 = new Port(this);
         p5 = new Port(this);
+        poly1 = new Polygon();
+        poly2 = new Polygon();
+        poly3 = new Polygon();
+        poly4 = new Polygon();
         this.setTitle("Title");
         this.setLayout(null);
         this.setBackground(Color.WHITE);
@@ -149,28 +153,7 @@ public class Block extends JPanel implements MouseListener, MouseMotionListener 
         canvas.repaint();
     }
 
-    // private void initPoly() {
-    // poly1 = new Polygon();
-    // poly2 = new Polygon();
-    // poly3 = new Polygon();
-
-    // poly1.addPoint(5, 5);
-    // poly1.addPoint(p4.getX() + 5, 5);
-    // poly1.addPoint(p1.getX() + 5, p4.getY() + 5);
-
-    // poly2.addPoint(5, p2.getY() + 5);
-    // poly2.addPoint(p4.getX() + 5, p2.getY() + 5);
-    // poly2.addPoint(p1.getX() + 5, p4.getY() + 5);
-
-    // poly3.addPoint(5, 5);
-    // poly3.addPoint(5, p2.getY() + 5);
-    // poly3.addPoint(p1.getX() + 5, p4.getY() + 5);
-    // }
-
-    public Port findPort() {
-        P = MouseInfo.getPointerInfo().getLocation();
-        SwingUtilities.convertPointFromScreen(P, this);
-        Polygon poly1, poly2, poly3, poly4;
+    protected void initPoly() {
         poly1 = new Polygon();
         poly2 = new Polygon();
         poly3 = new Polygon();
@@ -191,7 +174,11 @@ public class Block extends JPanel implements MouseListener, MouseMotionListener 
         poly4.addPoint(p4.getX() + 5, 5);
         poly4.addPoint(p4.getX() + 5, p2.getY() + 5);
         poly4.addPoint(p1.getX() + 5, p4.getY() + 5);
+    }
 
+    public Port findPort() {
+        P = MouseInfo.getPointerInfo().getLocation();
+        SwingUtilities.convertPointFromScreen(P, this);
         if (poly1.contains(P))
             return p1;
         if (poly2.contains(P))
@@ -223,6 +210,8 @@ public class Block extends JPanel implements MouseListener, MouseMotionListener 
     }
 
     public Composite findParent() {
+        if (parent == null)
+            return null;
         return parent.findParent();
     }
 }
