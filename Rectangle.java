@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.geom.*;
 
 public class Rectangle extends Block {
 
@@ -19,13 +20,22 @@ public class Rectangle extends Block {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setColor(Color.black);
-        g.drawLine(5, 5, 5, 115);
-        g.drawLine(75, 5, 75, 115);
-        g.drawLine(5, 5, 75, 5);
-        g.drawLine(5, 5, 75, 5);
-        g.drawLine(5, 40, 75, 40);
-        g.drawLine(5, 80, 75, 80);
-        g.drawLine(5, 115, 75, 115);
+        Graphics2D g2 = (Graphics2D) g;
+        GeneralPath rectangle = new GeneralPath();
+        g2.setColor(Color.WHITE);
+        rectangle.moveTo(5, 5);
+        rectangle.lineTo(5, 115);
+        rectangle.lineTo(75, 115);
+        rectangle.lineTo(75, 5);
+        rectangle.closePath();
+        g2.fill(rectangle);
+        g2.setColor(Color.black);
+        g2.drawLine(5, 5, 5, 115);
+        g2.drawLine(75, 5, 75, 115);
+        g2.drawLine(5, 5, 75, 5);
+        g2.drawLine(5, 5, 75, 5);
+        g2.drawLine(5, 40, 75, 40);
+        g2.drawLine(5, 80, 75, 80);
+        g2.drawLine(5, 115, 75, 115);
     }
 }

@@ -41,6 +41,7 @@ public class Block extends JPanel implements MouseListener, MouseMotionListener 
         setPortVisible(false);
         p5.setVisible(false);
         parent = null;
+        this.setOpaque(false);
     }
 
     public void setTitle(String s) {

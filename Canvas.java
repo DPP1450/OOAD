@@ -77,22 +77,16 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
     }
 
     public void addBlock() {
-        if (frame.function == frame.classBtn) {
+        if (frame.function == frame.classBtn || frame.function == frame.useCase) {
+            Block newBlock;
             Point p = MouseInfo.getPointerInfo().getLocation();
             SwingUtilities.convertPointFromScreen(p, this);
             int X = (int) p.getX();
             int Y = (int) p.getLocation().getY();
-            Block newBlock = new Rectangle(this);
-            this.add(newBlock, 0);
-            newBlock.setLocation(X, Y);
-            blocks.add(newBlock);
-        }
-        if (frame.function == frame.useCase) {
-            Point p = MouseInfo.getPointerInfo().getLocation();
-            SwingUtilities.convertPointFromScreen(p, this);
-            int X = (int) p.getX();
-            int Y = (int) p.getLocation().getY();
-            Block newBlock = new Oval(this);
+            if (frame.function == frame.classBtn)
+                newBlock = new Rectangle(this);
+            else
+                newBlock = new Oval(this);
             this.add(newBlock, 0);
             newBlock.setLocation(X, Y);
             blocks.add(newBlock);
@@ -202,15 +196,12 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
 
     public static void drawAL(double sx, double sy, double ex, double ey,
             Graphics2D g2, String type) {
-        double H;
-        double L;
+        double H = 12;
+        double L = 8;
         if (type == "compositionLines") {
             H = 10;
             L = 6;
-        } else {
-            H = 12;
-            L = 8;
-        }
+        } // 美觀...
         double awrad = Math.atan(L / H);
         double arraow_len = Math.sqrt(L * L + H * H);
         double[] arrXY_1 = rotateVec(ex - sx, ey - sy, awrad, true, arraow_len);
@@ -230,6 +221,7 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
             triangle.lineTo(x_4, y_4);
             triangle.closePath();
             g2.draw(triangle);
+            g2.fill(triangle);
             g2.drawLine((int) sx, (int) sy, (int) (x_3 + (x_4 - x_3) / 2), (int) (y_3 + (y_4 - y_3) / 2));
         } else {
             double x_5 = x_3 + (x_4 - x_3) / 2;

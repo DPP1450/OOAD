@@ -19,7 +19,9 @@ public class Oval extends Block {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setColor(Color.black);
+        g.setColor(Color.WHITE);
+        g.fillOval(5, 5, 70, 50);
+        g.setColor(Color.BLACK);
         g.drawOval(5, 5, 70, 50);
     }
 }
