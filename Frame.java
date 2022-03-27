@@ -29,45 +29,8 @@ public class Frame extends JFrame {
         this.setVisible(true);
         this.getContentPane().setBackground(Color.gray);
         this.setLayout(null);
-        buttonList = new ArrayList<FunctionButton>();
-        functionSelect = new JPanel();
-        ButtonGroup = new JMenuItem("group");
-        ButtonUngroup = new JMenuItem("ungroup");
-        changeObjectName = new JMenuItem("change object name");
-        edit = new JMenu("Edit");
-        menuBar = new JMenuBar();
-        canvas = new Canvas(this);
-        functionSelect = new JPanel();
-        select = new FunctionButton("select", this);
-        associationLine = new FunctionButton("association line", this);
-        generalizationLine = new FunctionButton("generalization line", this);
-        compositionLine = new FunctionButton("composition line", this);
-        classBtn = new FunctionButton("class", this);
-        useCase = new FunctionButton("use case", this);
-        buttonList = new ArrayList<FunctionButton>();
-        buttonList.add(select);
-        buttonList.add(associationLine);
-        buttonList.add(generalizationLine);
-        buttonList.add(compositionLine);
-        buttonList.add(classBtn);
-        buttonList.add(useCase);
-        edit.add(ButtonGroup);
-        edit.add(ButtonUngroup);
-        edit.add(changeObjectName);
-        menuBar.add(edit);
-        this.add(functionSelect);
-        this.add(menuBar);
-        this.add(canvas);
-        this.add(functionSelect);
-        this.setJMenuBar(menuBar);
-        functionSelect.setLayout(null);
-        functionSelect.setBackground(Color.gray);
-        functionSelect.add(select);
-        functionSelect.add(associationLine);
-        functionSelect.add(generalizationLine);
-        functionSelect.add(compositionLine);
-        functionSelect.add(classBtn);
-        functionSelect.add(useCase);
+        newItem();
+        addItem();
         initLayout();
         groupAddActionListener();
         validate();
@@ -135,5 +98,50 @@ public class Frame extends JFrame {
         canvas.setLocation(140, 10);
         functionSelect.setSize(140, 700);
         functionSelect.setLocation(0, 20);
+    }
+
+    private void newItem() {
+        buttonList = new ArrayList<FunctionButton>();
+        functionSelect = new JPanel();
+        ButtonGroup = new JMenuItem("group");
+        ButtonUngroup = new JMenuItem("ungroup");
+        changeObjectName = new JMenuItem("change object name");
+        edit = new JMenu("Edit");
+        menuBar = new JMenuBar();
+        canvas = new Canvas(this);
+        functionSelect = new JPanel();
+        select = new FunctionButton("select", this);
+        associationLine = new FunctionButton("association line", this);
+        generalizationLine = new FunctionButton("generalization line", this);
+        compositionLine = new FunctionButton("composition line", this);
+        classBtn = new FunctionButton("class", this);
+        useCase = new FunctionButton("use case", this);
+        buttonList = new ArrayList<FunctionButton>();
+    }
+
+    private void addItem() {
+        buttonList.add(select);
+        buttonList.add(associationLine);
+        buttonList.add(generalizationLine);
+        buttonList.add(compositionLine);
+        buttonList.add(classBtn);
+        buttonList.add(useCase);
+        edit.add(ButtonGroup);
+        edit.add(ButtonUngroup);
+        edit.add(changeObjectName);
+        menuBar.add(edit);
+        this.add(functionSelect);
+        this.add(menuBar);
+        this.add(canvas);
+        this.add(functionSelect);
+        this.setJMenuBar(menuBar);
+        functionSelect.setLayout(null);
+        functionSelect.setBackground(Color.gray);
+        functionSelect.add(select);
+        functionSelect.add(associationLine);
+        functionSelect.add(generalizationLine);
+        functionSelect.add(compositionLine);
+        functionSelect.add(classBtn);
+        functionSelect.add(useCase);
     }
 }
