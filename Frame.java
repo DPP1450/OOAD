@@ -29,10 +29,10 @@ public class Frame extends JFrame {
         this.setVisible(true);
         this.getContentPane().setBackground(Color.gray);
         this.setLayout(null);
-        newItem();
-        addItem();
-        initLayout();
-        groupAddActionListener();
+        newItem(); // 新增frame 上的物件
+        addItem(); // 把他加到frame 中
+        initLayout(); // 佈局
+        groupAddActionListener(); // 增加meunbar內選項的功能
         validate();
     }
 
