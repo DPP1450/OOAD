@@ -65,9 +65,7 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
             selectedComposite.clear();
             selectStartPoint = MouseInfo.getPointerInfo().getLocation();
             SwingUtilities.convertPointFromScreen(selectStartPoint, this);
-            for (Block i : blocks) {
-                i.setPortVisible(false);
-            }
+            setAllUnvisible();
         }
     }
 
@@ -116,27 +114,12 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
         super.paint(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.BLACK);
-        for (Port[] i : AssociationLines) {
-            double x1 = i[0].getX() + i[0].block.getX() + 5;
-            double y1 = i[0].getY() + i[0].block.getY() + 5;
-            double x2 = i[1].getX() + i[1].block.getX() + 5;
-            double y2 = i[1].getY() + i[1].block.getY() + 5;
-            drawAL(x1, y1, x2, y2, g2, "AssociationLines");
-        }
-        for (Port[] i : generalizationLines) {
-            double x1 = i[0].getX() + i[0].block.getX() + 5;
-            double y1 = i[0].getY() + i[0].block.getY() + 5;
-            double x2 = i[1].getX() + i[1].block.getX() + 5;
-            double y2 = i[1].getY() + i[1].block.getY() + 5;
-            drawAL(x1, y1, x2, y2, g2, "generalizationLines");
-        }
-        for (Port[] i : compositionLines) {
-            double x1 = i[0].getX() + i[0].block.getX() + 5;
-            double y1 = i[0].getY() + i[0].block.getY() + 5;
-            double x2 = i[1].getX() + i[1].block.getX() + 5;
-            double y2 = i[1].getY() + i[1].block.getY() + 5;
-            drawAL(x1, y1, x2, y2, g2, "compositionLines");
-        }
+        for (Port[] i : AssociationLines)
+            drawAL(i, g2, "AssociationLines", 12, 8); // 箭頭長12 寬8
+        for (Port[] i : generalizationLines)
+            drawAL(i, g2, "generalizationLines", 12, 8);
+        for (Port[] i : compositionLines)
+            drawAL(i, g2, "compositionLines", 10, 6);
     }
 
     public void addLine(Port p1, Port p2) {
@@ -155,11 +138,9 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
         double xMin = Math.min(selectStartPoint.getX(), selectEndPoint.getX());
         double yMax = Math.max(selectStartPoint.getY(), selectEndPoint.getY());
         double yMin = Math.min(selectStartPoint.getY(), selectEndPoint.getY());
+        setAllUnvisible();
         for (Block i : blocks) {
-            if (i.getX() >= xMin && i.getX() <= xMax && i.getY() >= yMin && i.getY() <= yMax
-                    && i.getX() + i.p5.getX() >= xMin
-                    && i.getX() + i.p5.getX() <= xMax && i.getY() + i.p5.getY() >= yMin
-                    && i.p5.getY() + i.getY() <= yMax) {
+            if (inBound(i, xMax, xMin, yMax, yMin)) {
                 i.setPortVisible(true);
                 if (i.parent == null)
                     selectedBlock.add(i);
@@ -168,9 +149,20 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
                     if (!selectedComposite.contains(tmp))
                         selectedComposite.add(tmp);
                 }
-            } else {
-                i.setPortVisible(false);
             }
+        }
+    }
+
+    private boolean inBound(Block i, double xMax, double xMin, double yMax, double yMin) {
+        return (i.getX() >= xMin && i.getX() <= xMax && i.getY() >= yMin && i.getY() <= yMax
+                && i.getX() + i.p5.getX() >= xMin
+                && i.getX() + i.p5.getX() <= xMax && i.getY() + i.p5.getY() >= yMin
+                && i.p5.getY() + i.getY() <= yMax);
+    }
+
+    public void setAllUnvisible() {
+        for (Block i : blocks) {
+            i.setPortVisible(false);
         }
     }
 
@@ -197,14 +189,13 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
         repaint();
     }
 
-    public static void drawAL(double sx, double sy, double ex, double ey,
-            Graphics2D g2, String type) {
-        double H = 12;
-        double L = 8;
-        if (type == "compositionLines") {
-            H = 10;
-            L = 6;
-        } // 美觀...
+    public static void drawAL(Port[] i,
+            Graphics2D g2, String type, double H, double L) {
+
+        double sx = i[0].getX() + i[0].block.getX() + 5;
+        double sy = i[0].getY() + i[0].block.getY() + 5;
+        double ex = i[1].getX() + i[1].block.getX() + 5;
+        double ey = i[1].getY() + i[1].block.getY() + 5;
         double awrad = Math.atan(L / H);
         double arraow_len = Math.sqrt(L * L + H * H);
         double[] arrXY_1 = rotateVec(ex - sx, ey - sy, awrad, true, arraow_len);
