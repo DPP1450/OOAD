@@ -3,9 +3,9 @@ import java.awt.*;
 import java.awt.event.*;
 
 class FunctionButton extends JButton {
-    Frame frame;
+    UmlFrame frame;
 
-    FunctionButton(String s, Frame frame) {
+    FunctionButton(String s, UmlFrame frame) {
         super(s);
         this.frame = frame;
         this.setOpaque(true);

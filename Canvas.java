@@ -6,7 +6,7 @@ import java.awt.geom.*;
 
 public class Canvas extends JLayeredPane implements MouseListener, MouseMotionListener {
 
-    public Frame frame;
+    public UmlFrame frame;
     public Port lineStartPoint;
     public Block lineEndBlock;
     public ArrayList<Port[]> AssociationLines;
@@ -22,7 +22,7 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
     public Block renameCandidateBlock;
     public double xShift, yShift;
 
-    Canvas(Frame frame) {
+    Canvas(UmlFrame frame) {
         this.frame = frame;
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
