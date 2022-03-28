@@ -56,6 +56,7 @@ public class Composite extends JPanel implements MouseListener, MouseMotionListe
     public void mouseClicked(MouseEvent e) {
         if (canvas.frame.function == canvas.frame.select)
             canvas.selectedGroup = findParent();
+        canvas.addBlock();
     }
 
     @Override
