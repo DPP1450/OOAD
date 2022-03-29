@@ -50,6 +50,7 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
             selectEndPoint = MouseInfo.getPointerInfo().getLocation();
             SwingUtilities.convertPointFromScreen(selectEndPoint, this);
             select();
+            repaint();
         }
     }
 
@@ -66,6 +67,7 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
             selectStartPoint = MouseInfo.getPointerInfo().getLocation();
             SwingUtilities.convertPointFromScreen(selectStartPoint, this);
             setAllUnvisible();
+            repaint();
         }
     }
 
@@ -101,7 +103,7 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
 
     @Override
     public void mouseDragged(MouseEvent e) {
-
+        repaint();
     }
 
     @Override
@@ -120,6 +122,19 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
             drawAL(i, g2, "generalizationLines", 12, 8);
         for (Port[] i : compositionLines)
             drawAL(i, g2, "compositionLines", 10, 6);
+        if (frame.function == frame.select && selectStartPoint != null)
+            selectRectangle(g2);
+    }
+
+    private void selectRectangle(Graphics2D g2) {
+        Point P;
+        P = MouseInfo.getPointerInfo().getLocation();
+        SwingUtilities.convertPointFromScreen(P, this);
+        int xs = (int) Math.min(selectStartPoint.getX(), P.getX());
+        int ys = (int) Math.min(selectStartPoint.getY(), P.getY());
+        int xd = (int) Math.abs(P.getX() - selectStartPoint.getX());
+        int yd = (int) Math.abs(P.getY() - selectStartPoint.getY());
+        g2.drawRect(xs, ys, xd, yd);
     }
 
     public void addLine(Port p1, Port p2) {
@@ -151,6 +166,9 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
                 }
             }
         }
+        selectEndPoint = null;
+        selectStartPoint = null;
+        repaint();
     }
 
     private boolean inBound(Block i, double xMax, double xMin, double yMax, double yMin) {
