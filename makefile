@@ -1,4 +1,5 @@
 all:
-	javac -encoding utf8 Uml.java
+	@javac Uml.java
+	@java Uml
 clean :
-	rm *.class
+	@rm *.class
