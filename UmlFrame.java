@@ -47,6 +47,7 @@ public class UmlFrame extends JFrame {
                 }
             }
             canvas.setAllUnvisible();
+            canvas.renameCandidateBlock = null;
         }
     }
 
