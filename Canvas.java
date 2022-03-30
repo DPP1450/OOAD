@@ -188,7 +188,6 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
     public void group() {
         if (selectedBlock.size() + selectedComposite.size() == 0)
             return;
-        System.out.println("add");
         Composite newComposite = new Composite(this, selectedBlock, selectedComposite);
         this.add(newComposite);
         composites.add(newComposite);
