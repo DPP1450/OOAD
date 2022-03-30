@@ -191,6 +191,7 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
         Composite newComposite = new Composite(this, selectedBlock, selectedComposite);
         this.add(newComposite);
         composites.add(newComposite);
+        setAllUnvisible();
         revalidate();
         repaint();
     }
@@ -204,6 +205,7 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
             i.parent = null;
         remove(selectedGroup);
         selectedGroup = null;
+        setAllUnvisible();
         revalidate();
         repaint();
     }
