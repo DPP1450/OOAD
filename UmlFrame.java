@@ -37,10 +37,7 @@ public class UmlFrame extends JFrame {
     }
 
     public void changeFunction(FunctionButton selectFunction) {
-        if (function == selectFunction) {
-            selectFunction.setBackground(Color.WHITE);
-            function = null;
-        } else {
+        if (function != selectFunction) {
             function = selectFunction;
             selectFunction.setBackground(Color.RED);
             for (JButton i : buttonList) {
@@ -49,6 +46,7 @@ public class UmlFrame extends JFrame {
                     i.setBackground(Color.WHITE);
                 }
             }
+            canvas.setAllUnvisible();
         }
     }
 
