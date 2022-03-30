@@ -110,9 +110,9 @@ public class UmlFrame extends JFrame {
         canvas = new Canvas(this);
         functionSelect = new JPanel();
         select = new FunctionButton("select", this);
-        associationLine = new FunctionButton("association line", this);
-        generalizationLine = new FunctionButton("generalization line", this);
-        compositionLine = new FunctionButton("composition line", this);
+        associationLine = new FunctionButton("<html>association<br>line</html>", this);
+        generalizationLine = new FunctionButton("<html>generalization<br>line</html>", this);
+        compositionLine = new FunctionButton("<html>composition<br>line</html>", this);
         classBtn = new FunctionButton("class", this);
         useCase = new FunctionButton("use case", this);
         buttonList = new ArrayList<FunctionButton>();
