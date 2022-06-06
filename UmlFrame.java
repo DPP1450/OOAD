@@ -19,8 +19,9 @@ public class UmlFrame extends JFrame {
     public FunctionButton useCase;
     public FunctionButton function;
     public ArrayList<FunctionButton> buttonList;
+    private static UmlFrame instance;
 
-    UmlFrame() {
+    private UmlFrame() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("UML");
         this.setResizable(false);
@@ -33,6 +34,14 @@ public class UmlFrame extends JFrame {
         initLayout(); // 佈局
         groupAddActionListener(); // 增加meunbar內選項的功能
         validate();
+    }
+
+    public static UmlFrame getInstance() {
+        if (instance == null) {
+            instance = new UmlFrame();
+
+        }
+        return instance;
     }
 
     public void changeFunction(FunctionButton selectFunction) {
@@ -102,7 +111,7 @@ public class UmlFrame extends JFrame {
     }
 
     private void newItem() {
-        canvas = Canvas.getInstance(this);
+        canvas = new Canvas(this);
         buttonList = new ArrayList<FunctionButton>();
         functionSelect = new JPanel();
         ButtonGroup = new JMenuItem("group");

@@ -21,9 +21,9 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
     public Composite selectedGroup;
     public Block renameCandidateBlock;
     public double xShift, yShift;
-    private static volatile Canvas instance = null;
+    private static Canvas instance;
 
-    private Canvas(UmlFrame frame) {
+    Canvas(UmlFrame frame) {
         this.frame = frame;
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
@@ -41,13 +41,7 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
         lineEndBlock = null;
         selectedGroup = null;
         renameCandidateBlock = null;
-    }
-
-    public static Canvas getInstance(UmlFrame frame) {
-        if (instance == null) {
-            instance = new Canvas(frame);
-        }
-        return instance;
+        instance = this;
     }
 
     public static Canvas getInstance() {
