@@ -23,7 +23,7 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
     public double xShift, yShift;
     private static Canvas instance;
 
-    Canvas() {
+    private Canvas() {
         frame = UmlFrame.getInstance();
         this.addMouseListener(this);
         this.addMouseMotionListener(this);

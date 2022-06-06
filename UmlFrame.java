@@ -107,7 +107,7 @@ public class UmlFrame extends JFrame {
     }
 
     public void newItem() {
-        canvas = new Canvas();
+        canvas = Canvas.getInstance();
         buttonList = new ArrayList<FunctionButton>();
         functionSelect = new JPanel();
         ButtonGroup = new JMenuItem("group");
