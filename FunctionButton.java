@@ -5,9 +5,9 @@ import java.awt.event.*;
 class FunctionButton extends JButton {
     UmlFrame frame;
 
-    FunctionButton(String s, UmlFrame frame) {
+    FunctionButton(String s) {
         super(s);
-        this.frame = frame;
+        frame = UmlFrame.getInstance();
         this.setOpaque(true);
         this.setBackground(Color.WHITE);
         this.setForeground(Color.BLACK);

@@ -29,10 +29,6 @@ public class UmlFrame extends JFrame {
         this.setVisible(true);
         this.getContentPane().setBackground(Color.gray);
         this.setLayout(null);
-        newItem(); // 新增frame 上的物件
-        addItem(); // 把他加到frame 中
-        initLayout(); // 佈局
-        groupAddActionListener(); // 增加meunbar內選項的功能
         validate();
     }
 
@@ -59,7 +55,7 @@ public class UmlFrame extends JFrame {
         }
     }
 
-    private void groupAddActionListener() {
+    public void groupAddActionListener() {
         ButtonGroup.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (function == select) {
@@ -91,7 +87,7 @@ public class UmlFrame extends JFrame {
         canvas.renameCandidateBlock.setTitle(newTitle);
     }
 
-    private void initLayout() {
+    public void initLayout() {
         select.setSize(140, 60);
         select.setLocation(0, 20);
         associationLine.setSize(140, 60);
@@ -110,8 +106,8 @@ public class UmlFrame extends JFrame {
         functionSelect.setLocation(0, 20);
     }
 
-    private void newItem() {
-        canvas = new Canvas(this);
+    public void newItem() {
+        canvas = new Canvas();
         buttonList = new ArrayList<FunctionButton>();
         functionSelect = new JPanel();
         ButtonGroup = new JMenuItem("group");
@@ -120,16 +116,16 @@ public class UmlFrame extends JFrame {
         edit = new JMenu("Edit");
         menuBar = new JMenuBar();
         functionSelect = new JPanel();
-        select = new FunctionButton("select", this);
-        associationLine = new FunctionButton("<html>association<br>line</html>", this);
-        generalizationLine = new FunctionButton("<html>generalization<br>line</html>", this);
-        compositionLine = new FunctionButton("<html>composition<br>line</html>", this);
-        classBtn = new FunctionButton("class", this);
-        useCase = new FunctionButton("use case", this);
+        select = new FunctionButton("select");
+        associationLine = new FunctionButton("<html>association<br>line</html>");
+        generalizationLine = new FunctionButton("<html>generalization<br>line</html>");
+        compositionLine = new FunctionButton("<html>composition<br>line</html>");
+        classBtn = new FunctionButton("class");
+        useCase = new FunctionButton("use case");
         buttonList = new ArrayList<FunctionButton>();
     }
 
-    private void addItem() {
+    public void addItem() {
         buttonList.add(select);
         buttonList.add(associationLine);
         buttonList.add(generalizationLine);

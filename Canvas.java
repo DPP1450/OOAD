@@ -23,8 +23,8 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
     public double xShift, yShift;
     private static Canvas instance;
 
-    Canvas(UmlFrame frame) {
-        this.frame = frame;
+    Canvas() {
+        frame = UmlFrame.getInstance();
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
         this.setLayout(null);
@@ -45,6 +45,9 @@ public class Canvas extends JLayeredPane implements MouseListener, MouseMotionLi
     }
 
     public static Canvas getInstance() {
+        if (instance == null) {
+            instance = new Canvas();
+        }
         return instance;
     }
 
