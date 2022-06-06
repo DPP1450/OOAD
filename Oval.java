@@ -2,8 +2,7 @@ import java.awt.*;
 
 public class Oval extends Block {
 
-    Oval(Canvas canvas) {
-        super(canvas);
+    Oval() {
         this.setSize(80, 60);
         super.title.setSize(60, 20);
         super.title.setLocation(25, 15);

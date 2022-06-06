@@ -8,7 +8,7 @@ public class Block extends JPanel implements MouseListener, MouseMotionListener 
     private boolean selected;
     public Point P;
     public Point moveStartPoint;
-    public Canvas canvas;
+    public Canvas canvas = Canvas.getInstance();;
     public Composite parent;
     public double parentDistanceX, parentDistanceY;
     public int height, width;
@@ -19,9 +19,8 @@ public class Block extends JPanel implements MouseListener, MouseMotionListener 
     Port p4;
     Port p5;
 
-    Block(Canvas canvas) {
+    Block() {
         title = new JLabel();
-        this.canvas = canvas;
         p1 = new Port(this);
         p2 = new Port(this);
         p3 = new Port(this);

@@ -3,8 +3,7 @@ import java.awt.geom.*;
 
 public class Rectangle extends Block {
 
-    Rectangle(Canvas canvas) {
-        super(canvas);
+    Rectangle() {
         this.setSize(80, 120);
         super.title.setSize(70, 30);
         super.title.setLocation(10, 10);

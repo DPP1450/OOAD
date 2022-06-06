@@ -4,7 +4,6 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 public class UmlFrame extends JFrame {
-
     public Canvas canvas;
     private JMenuBar menuBar;
     private JMenuItem ButtonGroup;
@@ -103,6 +102,7 @@ public class UmlFrame extends JFrame {
     }
 
     private void newItem() {
+        canvas = Canvas.getInstance(this);
         buttonList = new ArrayList<FunctionButton>();
         functionSelect = new JPanel();
         ButtonGroup = new JMenuItem("group");
@@ -110,7 +110,6 @@ public class UmlFrame extends JFrame {
         changeObjectName = new JMenuItem("change object name");
         edit = new JMenu("Edit");
         menuBar = new JMenuBar();
-        canvas = new Canvas(this);
         functionSelect = new JPanel();
         select = new FunctionButton("select", this);
         associationLine = new FunctionButton("<html>association<br>line</html>", this);
